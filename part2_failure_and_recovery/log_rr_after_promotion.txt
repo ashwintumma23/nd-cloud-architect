@@ -1,0 +1,34 @@
+[ec2-user@ip-10-2-1-115 ~]$ mysql -h udacity-read-replica.cvj6fa1p5t1s.us-west-2.rds.amazonaws.com -P 3306 -u admin -p
+Enter password: 
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MySQL connection id is 31
+Server version: 8.0.33 Source distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MySQL [(none)]> use udacity;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+MySQL [udacity]> INSERT INTO student VALUES(4, 'GHI');
+Query OK, 1 row affected (0.007 sec)
+
+MySQL [udacity]> SELECT * FROM student; 
++----+------+
+| id | name |
++----+------+
+|  1 | ABC  |
+|  2 | XYZ  |
+|  3 | LMN  |
+|  4 | GHI  |
++----+------+
+4 rows in set (0.001 sec)
+
+MySQL [udacity]> exit;
+Bye
+[ec2-user@ip-10-2-1-115 ~]$ exit;
+logout
+Connection to ec2-34-220-104-224.us-west-2.compute.amazonaws.com closed.
