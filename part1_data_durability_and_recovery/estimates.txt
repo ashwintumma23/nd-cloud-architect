@@ -3,5 +3,17 @@ Minimum RTO for a single AZ outage
 
 1. Minimum RTO Single AZ Outage
 
-RDS automatically replicates the data from primary database to an instance in a different AZ. Whenever a failure is detected, RDS automatically fails over to the standby instance. RDS documentation states that the failover will happen under 35 seconds with zero data loss and with no manual intervention. 
+RDS automatically replicates the data from primary database to an instance in a different AZ. Whenever a failure is detected, RDS automatically fails over to the standby instance. RDS documentation states that the failover will happen under 35 seconds with zero data loss and with no manual intervention. This ensures quick recovery. If this activity needs to be done manually, then from the time the problem happens, and the alert triggering off (around 5 minutes), and then switching manually (around 1 minute), would take around 7-10 minutes.
+
+2. Minimum RTO for a single region outage
+In this case, we will have to bring up the read replica as primary instance (Around 15 minutes based on the size as well), and then apply the DNS changes in the application to connect to a new end point. This can take upto 5-7 minutes. In total, it will take around 30 minutes for the RTO.
+
+3. Minimum RPO for a single AZ outage
+RDS documentation states that the transactional logs are uploaded every 5 minutes. Thus, if this is case then the most data that would be lost would be 5 minutes.
+
+4. Minimum RPO for a single region outage
+Read replicas in different region are kept as up to date as possible with the primary database. so the read replica will also have the same RPO as the primary database. Considering  configuration change times and human reaction delays it can take upto 15 minutes as RPO.
+
+
+
 
